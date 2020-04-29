@@ -34,5 +34,7 @@ The introduction tab will eventually cover the basis for coliform counts and the
 The analysis tab will get the weather and river data overlays that I'm working on as well as the reactive statistics tests that the reader can perform on their filtered data.
 'Models' tab where the user can see either the negative binomial glm I tested and/or go ahead change the variables or distribution and test any model they please (within reason).  Ultimately a function where they can model coliform counts on changes in temp and precipitation; a visualization that shows how sensitive the model is to each parameter.
 <br>
+
 <br>
----
+
+
