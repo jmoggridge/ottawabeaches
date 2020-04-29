@@ -1,1 +1,1 @@
-raw data has been tidyed such that categorical data all have consistent labels across all years. This is not the case for the Ottawa beach water sampling data, as different codes were used in each year. I've done my best to make sure that the labels are accurate here but no guarantees
+the three datasets used by app.R
