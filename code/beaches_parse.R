@@ -3,7 +3,6 @@ library(lubridate)
 require(rcartocolor)
 
 ### CSV data:
-# geographic data
 
 # beaches count and beach status data
 beaches <- read.csv("beach_ecoli.csv", strip.white=TRUE)
