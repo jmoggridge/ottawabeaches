@@ -2,6 +2,8 @@
 ---
 
 This is the repository for the Ottawa Beaches dashboard at https://jmoggridge.shinyapps.io/OttawaBeaches/.
+The dashboard shows visualizations of publicly available beach water testing data from the City of Ottawa. To my knnowledge, no other comprehensive set of figures exists in the public domain for this data (as of May 29th, 2020). As such, the dashboard should be very useful to any public who take an interest in beach water safety in the region.
+
 The dashboard is still a work in progress as I figure out how to do modelling for E. coli abundance based on environmental factors, location, previous day's count, etc.
 The end-goal of the project is to create a forecast for beach swimming: a tool that predicts whether E. coli abundance will be in excess of safety thresholds in real-time and into the future. I plan to generate forecast predictions for each beach during summer 2020 to assess the model accuracy. If the project is successful, the dashboard could serve as a template for jurisdictions to apply to their data for similar goals. The motivation for this project is curiosity; I am not affiliated with the city or being compensated by anyone for this work.
 
