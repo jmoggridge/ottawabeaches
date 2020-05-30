@@ -1,31 +1,57 @@
 # Ottawa Beaches dashboard
 ---
+
 This is the repository for the Ottawa Beaches dashboard at https://jmoggridge.shinyapps.io/OttawaBeaches/.
 
 ## About 
+---
+**The goal of the project is to create a *forecast for beach swimming***: a tool that predicts whether fecal indicator bacteria (FIB, ie. *E. coli*) abundance will be in excess of safety thresholds in real-time and into the future.
+
+I plan to generate forecast predictions for each beach during summer 2020 to assess the model accuracy. If the project is successful, the dashboard could serve as a template for jurisdictions to apply to their data for similar goals. The motivation for this project is curiosity; I am not affiliated with the city or being compensated by anyone for this work. I am currently a grad student in Bioinformatics; this side project provides an avenue for me to learn and apply statistics, coding, and science communication skills with real-world datasets, a tangible goal, and potential benefits for people in my hometown.
+
+I plan on **modelling & forecasting for E. coli abundance during the 2020 season** based on environmental factors, location, previous day's count, etc. Predictions will be evaluated against the accuracy of the current persistence model for testing. If a predictive model is shown to be useful, I hope to publish the results and work in collaboration with the city to integrate modelling into their beach water monitoring system.
 
 **The dashboard currently shows visualizations of beach water testing data from the City of Ottawa 2014-2019**. To my knowledge, no other comprehensive set of figures exists in the public domain for this data (as of May 29th, 2020); the dashboard should be very useful to anyone interested in beach water monitoring in the region.
 
-**The goal of the project is to create a *forecast for beach swimming***: a tool that predicts whether E. coli abundance will be in excess of safety thresholds in real-time and into the future.  
-I plan to generate forecast predictions for each beach during summer 2020 to assess the model accuracy. If the project is successful, the dashboard could serve as a template for jurisdictions to apply to their data for similar goals. The motivation for this project is curiosity; I am not affiliated with the city or being compensated by anyone for this work. I am currently a grad student in Bioinformatics; this side project provides an avenue for me to learn and apply statistics, coding, and science communication skills with real-world datasets, a tangible goal, and potential benefits for people in my hometown.
 
-The dashboard is still a work in progress: I plan on **modelling & forecasting for E. coli abundance during the 2020 season** based on environmental factors, location, previous day's count, etc. Predictions will be evaluated against the accuracy of the current persistence model for testing. If a predictive model is shown to be useful, I hope to publish the results and work in collaboration with the city to integrate modelling into their beach water monitoring system.
 
-Below are some details about the technical aspects of the process involved in creating the dashboard
 
-## Process
+
+
+## Creating a Predictive tool for Fecal Indicator Bacteria (FIB)
+---
 
 **I am following a six-step process from USGS to create the modelling system**
-see here:
+see here: https://www.epa.gov/beach-tech/six-key-steps-developing-and-using-predictive-tools-your-beach
 
-The steps are :
-  1 - 
-  2
-  3
-  4
-  5
-  6
+**1. Evaluate the appropriateness of a FIB predictive tool**
+  - *Is there a need for the tool?*
+    - The current monitoring system assumes a 'persistence model' with FIB remaining roughly constant over the testing interval (24hr)
+       - in essence: The advisory for today is based on yesterday's information
+    - Ottawa beaches frequently have high E. coli counts (10% of total beach-days 2014-2019).
+    - FIB can change substantially during the 24 hr lab time.
+    - The main purpose of the tool is to predict events where FIB might surpass safety thresholds during testing lag-time.
+    - The 'persistence model' might be complemented such a predictive tool   
+   
+  - *Are beach characteristics compatible with predictive tools?*
+       
+ **2. - Identify variables and collect data**
+  
+  -3. - Perform Exploratory Data Analysis
+  
+  -4. - Develop and test a predictive model
+  
+  -5. - Integrate Predictive Tool into beach monitoring/notification program
+  
+  -6. - Evaluate predictive tool over time
 
+My work so far:
+  
+
+
+
+
+# Technical details about dashboard
 
 ---
 ## Github repository
