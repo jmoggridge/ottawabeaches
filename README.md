@@ -16,12 +16,13 @@ I plan on **modelling & forecasting for E. coli abundance during the 2020 season
 
 ---
 
-<br>
-## Creating a Predictive tool for Fecal Indicator Bacteria (FIB)
----
 
-**I am following a six-step process from USGS to create the modelling system**
-see here: https://www.epa.gov/beach-tech/six-key-steps-developing-and-using-predictive-tools-your-beach
+## Creating a Predictive tool for Fecal Indicator Bacteria (FIB)
+
+
+#### A six-step process from USGS to create the modelling system**
+
+This is the guide I am using to create the prediction tool. see here: https://www.epa.gov/beach-tech/six-key-steps-developing-and-using-predictive-tools-your-beach. Below is the checklist and my notes about Ottawa beaches and how I'm applying the information from the USGS guide. Together, I start to build the case for the predictive tool. Many other places have developed their tools with this guide and often it has been grad students (like me) doing the work.
 
 **1. Evaluate the appropriateness of a FIB predictive tool**
   - *Is there a need for the tool?*
