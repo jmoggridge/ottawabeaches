@@ -26,24 +26,61 @@ see here: https://www.epa.gov/beach-tech/six-key-steps-developing-and-using-pred
 
 **1. Evaluate the appropriateness of a FIB predictive tool**
   - *Is there a need for the tool?*
-    - The current monitoring system assumes a 'persistence model' with FIB remaining roughly constant over the testing interval (24hr)
-       - in essence: The advisory for today is based on yesterday's information
     - Ottawa beaches frequently have high E. coli counts (10% of total beach-days 2014-2019).
-    - FIB can change substantially during the 24 hr lab time.
+    - The current daily testing system assumes a 'persistence model' with FIB remaining roughly constant over the testing interval (24hr)
+       - in short: The advisory for today is based on yesterday's FIB. We don't *know* current level of risk for today.
+    - but FIB could change substantially during the 24 hr lab time leading to an inaccurate advisory.
     - The main purpose of the tool is to predict events where FIB might surpass safety thresholds during testing lag-time.
-    - The 'persistence model' might be complemented such a predictive tool   
+    - The 'persistence model' might be complemented such a predictive tool
    
   - *Are beach characteristics compatible with predictive tools?*
-       
- **2. - Identify variables and collect data**
+      - 'The beach operates under a constant range of "normal" conditions'
+        - Ottawa beaches conditions during summer are fairly stable with the exception of major precipitation events. Range of 'normal conditions' that do not vary greatly from year to year.
+        - River beaches are mostly impacted by rainfall causing agricultual runoff and sewage outflows.
+        - The number of dry days preceding rainfall influences the effect of rainfall ('first-flush' phenomenon).
+    
+      - 'Exceedences of beach notification thresholds occur occasionally but are not a chronic problem'
+        - Ottawa beaches have ~10% FIB closures and ~5% rainfall closures - I think our beaches fit this description well.
+        
+      - 'FIB densities change over relatively short periods of time (time-lag problem)'
+        - To be assessed and demonstrated
+        - I looked at the 24hr differences between all observations and plotted these for each beach location.
+        - FIB can change greatly over a 24 hr period. Persistence model prediction is that FIB_today = FIB_yesterday
+        - Ie. 'persistent model' predictions vs actual timeseries by shifting the E.coli abundance lines 1 day to right and take the difference. Plot differences in a histogram.
+        - Find number of days where persistence model provides accurate positive, false positive, accurate negative, false negative.
+
+     - 'Sufficent amount of historical FIB and independent variables data exists'
+       - Six years of beach data for 5 locations
+       - lots of meterological data can be linked to FIB observations. 
+         -Currently I have daily data but hourly data could improve the model later.
+       - Some hydrology data: flow and level; for both rivers.
+       - no data on beach use/ number of bathers?
+       - might be able to find useful data about river turbity and chemistry: pH, solutes, etc. ?
+
+      
+**2. - Identify variables and collect data**
+    - As noted above, 6 years of historical and daily testing for the future.
+    - Identify variables of interest for modelling
+      - Rainfall - weighted trailing sum (48 hr or 72 hr)
+      - Dry days before rainfall
+      - Temperature
+      - time of year
+      - last FIB count
+      - location
+    
+ **3. - Perform Exploratory Data Analysis**
+   - For historical data 2014-2019, this is mostly finished and presented in the dashboard already.
+   - I did not want to clutter the dashboard too much, so have not added uninteresting plots.
+   - 
   
-  -3. - Perform Exploratory Data Analysis
+ **4. - Develop and test a predictive model**
   
-  -4. - Develop and test a predictive model
+ **5. - Integrate Predictive Tool into beach monitoring/notification program**
+   - This will depend on whether the tool is shown to be accurate first. Then it will depend on collaboration with the city and obtaining funding to implement the model for public advisories.
   
-  -5. - Integrate Predictive Tool into beach monitoring/notification program
-  
-  -6. - Evaluate predictive tool over time
+ **6. - Evaluate predictive tool over time**
+   - New beach seasons should provide further training data and make predictions more accurate over time.
+   - the model can be refined as new variables of interest are tested and incorporated into the model (eg. wildlife migrations)
 
 My work so far:
   
