@@ -26,8 +26,12 @@ I am using [this guide from USGS](https://www.epa.gov/beach-tech/six-key-steps-d
 
 Below is documentation of my process through their checklist (*italics*). I've added notes with information about Ottawa beaches and how I'm applying the information from the USGS guide. The process will eventually build the case for a predictive model or demonstrate why it isn't appropriate for Ottawa beaches, given the data (we'll find out!).
 
+
+
 **1. *Evaluate the appropriateness of a FIB predictive tool***
+
   - [x] *Is there a need for the tool?*
+  
     - Ottawa beaches often close due to large E. coli counts (10% of total beach-days 2014-2019); recreational swimming carries the some risk of illness that we would like to minimize through closures while still maximizing safe swimming days.
     - The current daily testing system assumes a 'persistence model' with FIB remaining roughly constant over the testing interval (24hr)
        - in short: The advisory for today is based on yesterday's FIB. We don't *know* current level of risk for today.
@@ -36,6 +40,7 @@ Below is documentation of my process through their checklist (*italics*). I've a
     - The 'persistence model' might be complemented such a predictive tool
    
   - [x] *Are beach and monitoring program characteristics compatible with predictive tools?*
+  
       - *'The beach operates under a constant range of "normal" conditions'*
         - Ottawa beaches conditions during summer are fairly stable with the exception of major precipitation events. Range of 'normal conditions' that do not vary greatly from year to year.
         - River beaches are mostly impacted by rainfall causing agricultual runoff and sewage outflows.
@@ -70,30 +75,62 @@ Below is documentation of my process through their checklist (*italics*). I've a
        - Possible collaboration with local univeristies and government organizations to increase resources available
        - Possible collaboration with the public for data collection (*eg.* count bathers and enter online)
       
-**2. *Identify variables and collect data***
-    - USGS guide recommends 2 years for training and a year for testing models.
-    - As noted above, daily testing is already in place and there is six years of historical data (possibly more not publicly available).
-    - *Identify variables of interest for modelling*
-      - Rainfall - weighted trailing sum (48 hr or 72 hr)
-      - Dry days before rainfall
-      - Temperature
-      - Time of year (seasonality)
-      - Beach location
-      - Previous FIB count at same location
+      
+      
+**2. *Identify variables and collect data*** 
 
+  - *USGS guide recommends 2 years for training and a year for testing models*
+    - As noted above, daily testing is already in place and there is six years of historical data (possibly more not publicly available).
     
- **3. - Perform Exploratory Data Analysis**
-   - ***I am currently working on this stage of the process***
-   - For historical data 2014-2019, this is mostly finished and presented in the dashboard already.
-   - I did not want to clutter the dashboard too much, so have not added uninteresting plots.
-   - 
+  - *Data needs to be high quality, consistent, easily-obtained, & temporally-relevant*
+    - I feel that the rigorous water testing & available environmental data fulfill these requirements.
+    - Need to confirm that testing methods were consistent over period 2014-2019
+    - Need to ensure that this information will be able to be scraped for up-to-date predictions when model is deployed
+    
+  - *Identify independent variables of interest for modelling*
+    - Beach location
+    - previous FIB measurements
+    - Meterological: temperature, precipitation; possibly also wind, UV, cloud-cover
+    - Hydrological: river flow and level. Also interested in obtaining turbity and pH data if possible.
+    - Time of year (seasonality)
+   
+   
+   
+ **3. *Perform Exploratory Data Analysis***
+   
+   - finished:
+     - I have shown the FIB distributions for different beach locations and years.
+       - Dashboard > Statistics > Distributions
+       - there are some interesting differences here between locations, years, month of year
+   
+   - in progress:
+     - I am working on looking at the interactions between environmental variables and FIB
+     - trying different statistics from meterological data that have most predictive value
+       - Recent rainfall statistic: USGS example is 3d weighted sum; can also try 2d, 1d; unweighted.
+       - Recent temperatures statistics: means, highs, lows.
   
- **4. - Develop and test a predictive model**
+  - to do:
+    - 
   
- **5. - Integrate Predictive Tool into beach monitoring/notification program**
-   - This will depend on whether the tool is shown to be accurate first. Then it will depend on collaboration with the city and obtaining funding to implement the model for public advisories.
+ **4. *Develop and test a predictive model***
+
+  - *evaluate accuracy of the 'persistence model'*
+  - *develop predictive model*
+    - *train predictive model / test predictive model*
+  -  *evaluate predictive model vs persistence model for accuracy*
   
- **6. - Evaluate predictive tool over time**
+  
+   - a hypothetical generalized linear model for negative binomial FIB distribution:
+     -  FIB ~ \math \beta_0 rain$ + temp + day of year + location + river activity
+   - in progress
+   
+  
+ **5. *Integrate Predictive Tool into beach monitoring/notification program***
+ 
+   - This will depend on whether the tool is shown to be accurate & useful first. Then it will depend on collaboration with the city and obtaining a small amount of funding to further develop/validate/implement the model.
+  
+ **6. *Evaluate predictive tool over time***
+ 
    - New beach seasons should provide further training data and make predictions more accurate over time.
    - the model can be refined as new variables of interest are tested and incorporated into the model (eg. wildlife migrations)
   
