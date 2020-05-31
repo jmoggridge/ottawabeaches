@@ -119,8 +119,10 @@ Below is documentation of my process through their checklist (*italics*). I've a
       - get basic statistics for FIB & summarize
         - geomtric means, medians, variance, min/max info
         - need to add to dashboard under 'Statistics'>'Distributions'>'Summary tables'
-      - look at the persistence model:
-        - 24-hr change statistics & summary table
+      - identify outliers that might need removal from dataset for model
+        - there are a few questionable values
+        - there are many that hit the 1000 cfu/100mL limit of detection
+        - many observations are 10 cfu /100 ml, the lower limit of detection, a couple are below 10.
                   
     3. *Characterize independent variables datasets*
       - Establish 'normal range' for indep variables and statistics derived from these.
@@ -130,7 +132,11 @@ Below is documentation of my process through their checklist (*italics*). I've a
          - Recent temperatures statistics: means, highs, lows.
      
     4. *Examine the realtionship between FIB and independent variables*
-      - in progress
+      - Scatterplots
+        - FIB ~ rain statistic shows different inflection points for different locations
+        - Have a series of plots for different composite variables for rainfall (how to decide?)
+        - FIB ~ any Rain statistic: p-value is basically 10E-16
+        - in progress: temp, rivers, interaction between indep variables
   
        
      
@@ -138,14 +144,18 @@ Below is documentation of my process through their checklist (*italics*). I've a
  **4. *Develop and test a predictive model***
 
   - *evaluate accuracy of the 'persistence model'*
+    - calculate sensitivity, selectivity, accuracy
   - *develop predictive model*
-    - *train predictive model / test predictive model*
+    - 
+    - train predictive model / test predictive model
   -  *evaluate predictive model vs persistence model for accuracy*
     
   - a hypothetical generalized linear model for FIB using the negative binomial distribution:
      -  `glm.nb(FIB ~ previous FIB + rain + temperature + day of year + location + river activity)`
-  
-  
+
+  - look at the persistence model:
+    - 24-hr change statistics & summary table
+
  **5. *Integrate Predictive Tool into beach monitoring/notification program***
  
    - This will depend on whether the tool is shown to be accurate & useful first. Then it will depend on collaboration with the city and obtaining a small amount of funding to further develop/validate/implement the model.
