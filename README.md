@@ -108,10 +108,13 @@ Below is documentation of my process through their checklist (*italics*). I've a
 
     - I have been following this [CADDIS guide from the EPA](https://www.epa.gov/caddis-vol4/exploratory-data-analysis) for technical guidance.
     
-    - **EDA plan**:
-    0. Data is all tidy and prepared for analysis (done for historical data except rivers 2019)
-    1. FIB density ranges have been established from the 'Beaches' dataset for 2014-2019
-      - we have explored these at the five locations in the dashboard; we know which locations fare worse.
+  - **EDA plan**:
+    1. Data is all tidy and prepared for analysis (done for historical data except rivers 2019)
+    2. *Characterize FIB dataset*
+      - FIB density ranges have been established from the 'Beaches' dataset for 2014-2019
+      - have explored these at the five locations in the dashboard
+      - have explored FIB density distributions by location, year, month
+        - box+dot plots, histograms, violins; summary tables.
         - Dashboard > Statistics > Distributions
       - get basic statistics for FIB & summarize
         - geomtric means, medians, variance, min/max info
@@ -119,14 +122,15 @@ Below is documentation of my process through their checklist (*italics*). I've a
       - look at the persistence model:
         - 24-hr change statistics & summary table
                   
-    2. Establish 'normal range' for indep variables and statistics derived from these.
+    3. *Characterize independent variables datasets*
+      - Establish 'normal range' for indep variables and statistics derived from these.
       - plots to show distribution and range for each indep variable
       - trying different statistics from meterological data that have most predictive value
          - Recent rainfall statistic: USGS example is 3d weighted sum; can also try 2d, 1d; unweighted.
          - Recent temperatures statistics: means, highs, lows.
      
-    3. Evaluate correlation between indep variables of interest and FIB
-      - have already done most of the rough work in coding, need to create figures for dashboard. 
+    4. *Examine the realtionship between FIB and independent variables*
+      - in progress
   
        
      
