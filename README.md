@@ -26,7 +26,7 @@ This is the guide I am using to create the prediction tool. see here: https://ww
 
 **1. Evaluate the appropriateness of a FIB predictive tool**
   - *Is there a need for the tool?*
-    - Ottawa beaches frequently have high E. coli counts (10% of total beach-days 2014-2019).
+    - Ottawa beaches often close due to large E. coli counts (10% of total beach-days 2014-2019); recreational swimming carries the some risk of illness that we would like to minimize through closures while still maximizing safe swimming days.
     - The current daily testing system assumes a 'persistence model' with FIB remaining roughly constant over the testing interval (24hr)
        - in short: The advisory for today is based on yesterday's FIB. We don't *know* current level of risk for today.
     - but FIB could change substantially during the 24 hr lab time leading to an inaccurate advisory.
@@ -65,10 +65,12 @@ This is the guide I am using to create the prediction tool. see here: https://ww
       - Dry days before rainfall
       - Temperature
       - time of year
-      - last FIB count
       - location
+      - previous FIB count at same location
+
     
  **3. - Perform Exploratory Data Analysis**
+   - ***I am currently working on this stage of the process***
    - For historical data 2014-2019, this is mostly finished and presented in the dashboard already.
    - I did not want to clutter the dashboard too much, so have not added uninteresting plots.
    - 
