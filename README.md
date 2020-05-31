@@ -6,9 +6,7 @@ This is the repository for the Ottawa Beaches dashboard at https://jmoggridge.sh
 
 ## About 
 
-**The goal of the project is to create a *forecast for beach swimming***: a tool that predicts whether fecal indicator bacteria (FIB, ie. *E. coli*) abundance will be in excess of safety thresholds in real-time and into the future.
-
-I plan to generate forecast predictions for each beach during summer 2020 to assess the model accuracy. If the project is successful, the dashboard could serve as a template for jurisdictions to apply to their data for similar goals. The motivation for this project is curiosity; I am not affiliated with the city or being compensated by anyone for this work. I am currently a grad student in Bioinformatics; this side project provides an avenue for me to learn and apply statistics, coding, and science communication skills with real-world datasets, a tangible goal, and potential benefits for people in my hometown.
+**The goal of the project is to create a *forecast for beach swimming***: a tool that predicts whether fecal indicator bacteria (FIB, ie. *E. coli*) abundance will be in excess of safety thresholds in real-time and into the future.  The motivation for this project is curiosity; I am not affiliated with the city or being compensated by anyone for this work. I am currently a grad student in Bioinformatics; this side project provides an avenue for me to learn and apply statistics, coding, and science communication skills with real-world datasets, a tangible goal, and potential benefits for people in my hometown.
 
 I plan on **modelling & forecasting for E. coli abundance during the 2020 season** based on environmental factors, location, previous day's count, etc. Predictions will be evaluated against the accuracy of the current persistence model for testing. If a predictive model is shown to be useful, I hope to publish the results and work in collaboration with the city to integrate modelling into their beach water monitoring system.
 
@@ -98,19 +96,22 @@ Below is documentation of my process through their checklist (*italics*). I've a
    
  **3. *Perform Exploratory Data Analysis***
    
-   - finished:
-     - I have shown the FIB distributions for different beach locations and years.
+  - finished:
+     - plot FIB distributions for different beach locations and years
        - Dashboard > Statistics > Distributions
        - there are some interesting differences here between locations, years, month of year
-   
-   - in progress:
+     - get basic statistics for FIB & summarize
+       - geomtric means, medians, variance, min/max info
+       - need to add to dashboard under 'Statistics'>'Distributions'>'Summary tables'
+       
+  - in progress:
      - I am working on looking at the interactions between environmental variables and FIB
      - trying different statistics from meterological data that have most predictive value
        - Recent rainfall statistic: USGS example is 3d weighted sum; can also try 2d, 1d; unweighted.
        - Recent temperatures statistics: means, highs, lows.
-  
+       
   - to do:
-    - 
+     - 24-hr change statistics & summary table
   
  **4. *Develop and test a predictive model***
 
@@ -120,8 +121,8 @@ Below is documentation of my process through their checklist (*italics*). I've a
   -  *evaluate predictive model vs persistence model for accuracy*
   
   
-   - a hypothetical generalized linear model for negative binomial FIB distribution:
-     -  FIB ~ \math \beta_0 rain$ + temp + day of year + location + river activity
+   - a hypothetical generalized linear model for FIB using the negative binomial distribution:
+     -  `glm.nb(FIB ~ previous FIB + rain + temperature + day of year + location + river activity)`
    - in progress
    
   
