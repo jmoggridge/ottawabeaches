@@ -66,7 +66,6 @@ Below is documentation of my process through their checklist (*italics*). I've a
 
      - *'Funding, Monitoring, Resources'*
        - Monitoring already being performed. Advisories are issued daily.
-       - I am personally contributing time for development and using personal resources as well as free software and hosting.
        - If the model is to go into action for public, would need to be maintained over time and updated.
        - I'm thinking about writing a grant proposal after building the models and a testing'
        - Possible COVID19 stimulus project for the City.
@@ -101,28 +100,36 @@ Below is documentation of my process through their checklist (*italics*). I've a
    
  **3. *Perform Exploratory Data Analysis***
 
-  - *Goals:
-    -*explore relationships between independent and FIB density variables to identify the best candidates for model building*
-    -*assess assumptions made in predictive modelling*:
+  - *Goals:*
+    - *explore relationships between independent and FIB density variables to identify the best candidates for model building*
+    - *assess assumptions of predictive modelling*:
       1. *datsets represent the normal range of conditions that are expected in the future (extrapolation problem)*
       2. *the FIB density and independent variables are linearly related*
-  -  
-  - finished:
-     - plot FIB distributions for different beach locations and years
-       - Dashboard > Statistics > Distributions
-       - there are some interesting differences here between locations, years, month of year
-     - get basic statistics for FIB & summarize
-       - geomtric means, medians, variance, min/max info
-       - need to add to dashboard under 'Statistics'>'Distributions'>'Summary tables'
+
+    - I have been following this [CADDIS guide from the EPA](https://www.epa.gov/caddis-vol4/exploratory-data-analysis) for technical guidance.
+    
+    - **EDA plan**:
+    0. Data is all tidy and prepared for analysis (done for historical data except rivers 2019)
+    1. FIB density ranges have been established from the 'Beaches' dataset for 2014-2019
+      - we have explored these at the five locations in the dashboard; we know which locations fare worse.
+        - Dashboard > Statistics > Distributions
+      - get basic statistics for FIB & summarize
+        - geomtric means, medians, variance, min/max info
+        - need to add to dashboard under 'Statistics'>'Distributions'>'Summary tables'
+      - look at the persistence model:
+        - 24-hr change statistics & summary table
+                  
+    2. Establish 'normal range' for indep variables and statistics derived from these.
+      - plots to show distribution and range for each indep variable
+      - trying different statistics from meterological data that have most predictive value
+         - Recent rainfall statistic: USGS example is 3d weighted sum; can also try 2d, 1d; unweighted.
+         - Recent temperatures statistics: means, highs, lows.
+     
+    3. Evaluate correlation between indep variables of interest and FIB
+      - have already done most of the rough work in coding, need to create figures for dashboard. 
+  
        
-  - in progress:
-     - I am working on looking at the interactions between environmental variables and FIB
-     - trying different statistics from meterological data that have most predictive value
-       - Recent rainfall statistic: USGS example is 3d weighted sum; can also try 2d, 1d; unweighted.
-       - Recent temperatures statistics: means, highs, lows.
-       
-  - to do:
-     - 24-hr change statistics & summary table
+     
   
  **4. *Develop and test a predictive model***
 
@@ -130,12 +137,10 @@ Below is documentation of my process through their checklist (*italics*). I've a
   - *develop predictive model*
     - *train predictive model / test predictive model*
   -  *evaluate predictive model vs persistence model for accuracy*
-  
-  
-   - a hypothetical generalized linear model for FIB using the negative binomial distribution:
+    
+  - a hypothetical generalized linear model for FIB using the negative binomial distribution:
      -  `glm.nb(FIB ~ previous FIB + rain + temperature + day of year + location + river activity)`
-   - in progress
-   
+  
   
  **5. *Integrate Predictive Tool into beach monitoring/notification program***
  
