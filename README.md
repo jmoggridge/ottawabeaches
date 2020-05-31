@@ -88,14 +88,25 @@ Below is documentation of my process through their checklist (*italics*). I've a
   - *Identify independent variables of interest for modelling*
     - Beach location
     - previous FIB measurements
-    - Meterological: temperature, precipitation; possibly also wind, UV, cloud-cover
-    - Hydrological: river flow and level. Also interested in obtaining turbity and pH data if possible.
+    - Meterological: 
+      - precipitation: amount, intensity, duration - to determine the timing & amount of runoff
+        - cumulative rainfall over specific trailing period prior to sampling
+        - days since last significant rainfall (to quantify fecal buildup on impervious surfaces)
+      - temperature: daily min, mean, max; temperature at sampling time.
+      - possibly also wind, UV, cloud-cover
+    - Hydrological: river discharge and level on each river. Also interested in obtaining turbity and pH data if possible.
     - Time of year (seasonality)
    
    
    
  **3. *Perform Exploratory Data Analysis***
-   
+
+  - *Goals:
+    -*explore relationships between independent and FIB density variables to identify the best candidates for model building*
+    -*assess assumptions made in predictive modelling*:
+      1. *datsets represent the normal range of conditions that are expected in the future (extrapolation problem)*
+      2. *the FIB density and independent variables are linearly related*
+  -  
   - finished:
      - plot FIB distributions for different beach locations and years
        - Dashboard > Statistics > Distributions
