@@ -22,10 +22,12 @@ I plan on **modelling & forecasting for E. coli abundance during the 2020 season
 
 #### A six-step process from USGS to create the modelling system**
 
-This is the guide I am using to create the prediction tool. see here: https://www.epa.gov/beach-tech/six-key-steps-developing-and-using-predictive-tools-your-beach. Below is the checklist and my notes about Ottawa beaches and how I'm applying the information from the USGS guide; through this I build the case for the predictive tool. Many other places have developed their tools with this guide and often it has been grad students (like me) doing the work for thesis projects.
+I am using [this guide from USGS](https://www.epa.gov/beach-tech/six-key-steps-developing-and-using-predictive-tools-your-beach) to create the FIB prediction tool for Ottawa beaches. Many other places have developed their tools with this guide and often it has been grad students (like me) doing the testing and/or modelling work for thesis projects, in collaboration with local beach administrators.
 
-**1. Evaluate the appropriateness of a FIB predictive tool**
-  - *Is there a need for the tool?*
+Below is documentation of my process through their checklist (*italics*). I've added notes with information about Ottawa beaches and how I'm applying the information from the USGS guide. The process will eventually build the case for a predictive model or demonstrate why it isn't appropriate for Ottawa beaches, given the data (we'll find out!).
+
+**1. *Evaluate the appropriateness of a FIB predictive tool***
+  - [x] *Is there a need for the tool?*
     - Ottawa beaches often close due to large E. coli counts (10% of total beach-days 2014-2019); recreational swimming carries the some risk of illness that we would like to minimize through closures while still maximizing safe swimming days.
     - The current daily testing system assumes a 'persistence model' with FIB remaining roughly constant over the testing interval (24hr)
        - in short: The advisory for today is based on yesterday's FIB. We don't *know* current level of risk for today.
@@ -33,40 +35,51 @@ This is the guide I am using to create the prediction tool. see here: https://ww
     - The main purpose of the tool is to predict events where FIB might surpass safety thresholds during testing lag-time.
     - The 'persistence model' might be complemented such a predictive tool
    
-  - *Are beach characteristics compatible with predictive tools?*
-      - 'The beach operates under a constant range of "normal" conditions'
+  - [x] *Are beach and monitoring program characteristics compatible with predictive tools?*
+      - *'The beach operates under a constant range of "normal" conditions'*
         - Ottawa beaches conditions during summer are fairly stable with the exception of major precipitation events. Range of 'normal conditions' that do not vary greatly from year to year.
         - River beaches are mostly impacted by rainfall causing agricultual runoff and sewage outflows.
         - The number of dry days preceding rainfall influences the effect of rainfall ('first-flush' phenomenon).
     
-      - 'Exceedences of beach notification thresholds occur occasionally but are not a chronic problem'
+      - *'Exceedences of beach notification thresholds occur occasionally but are not a chronic problem'*
         - Ottawa beaches have ~10% FIB closures and ~5% rainfall closures - I think our beaches fit this description well.
         
-      - 'FIB densities change over relatively short periods of time (time-lag problem)'
+      - *'FIB densities change over relatively short periods of time (time-lag problem)'*
         - To be assessed and demonstrated
         - I looked at the 24hr differences between all observations and plotted these for each beach location.
         - FIB can change greatly over a 24 hr period. Persistence model prediction is that FIB_today = FIB_yesterday
         - Ie. 'persistent model' predictions vs actual timeseries by shifting the E.coli abundance lines 1 day to right and take the difference. Plot differences in a histogram.
         - Find number of days where persistence model provides accurate positive, false positive, accurate negative, false negative.
 
-     - 'Sufficent amount of historical FIB and independent variables data exists'
-       - Six years of beach data for 5 locations
-       - lots of meterological data can be linked to FIB observations. 
-         -Currently I have daily data but hourly data could improve the model later.
-       - Some hydrology data: flow and level; for both rivers.
+     - *'Sufficent amount of historical FIB and independent variables data exists'*
+       - Six years of beach data for 5 locations. Daily testing in season will need to be available.
+       - lots of meterological data can be linked to FIB observations. Real-time available.
+         - Currently I have daily data but hourly data could improve the model later
+       - Some hydrology data: flow and level; for both rivers at one station each. Real-time data available from EC.
        - no data on beach use/ number of bathers?
-       - might be able to find useful data about river turbity and chemistry: pH, solutes, etc. ?
+       - might be able to find more useful data about river turbity and chemistry: pH, solutes, etc. ?
+       - other orgs: OttawaRiverKeeper, Universities, more weather info?
+       - Overall, a large amount of data is already publicly available.
 
+     - *'Funding, Monitoring, Resources'*
+       - Monitoring already being performed. Advisories are issued daily.
+       - I am personally contributing time for development and using personal resources as well as free software and hosting.
+       - If the model is to go into action for public, would need to be maintained over time and updated.
+       - I'm thinking about writing a grant proposal after building the models and a testing'
+       - Possible COVID19 stimulus project for the City.
+       - Possible collaboration with local univeristies and government organizations to increase resources available
+       - Possible collaboration with the public for data collection (*eg.* count bathers and enter online)
       
-**2. - Identify variables and collect data**
-    - As noted above, 6 years of historical and daily testing for the future.
-    - Identify variables of interest for modelling
+**2. *Identify variables and collect data***
+    - USGS guide recommends 2 years for training and a year for testing models.
+    - As noted above, daily testing is already in place and there is six years of historical data (possibly more not publicly available).
+    - *Identify variables of interest for modelling*
       - Rainfall - weighted trailing sum (48 hr or 72 hr)
       - Dry days before rainfall
       - Temperature
-      - time of year
-      - location
-      - previous FIB count at same location
+      - Time of year (seasonality)
+      - Beach location
+      - Previous FIB count at same location
 
     
  **3. - Perform Exploratory Data Analysis**
