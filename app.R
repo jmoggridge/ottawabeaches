@@ -1,38 +1,46 @@
 # Shiny app script for Ottawa Beaches dashboard.
-
-
 # Reactive objects all run in the 'server' section
 # Layout happens in the 'ui' section
 # Remember to set the current working directory to: setwd("~/Dropbox/R coding/ottawa_beaches")
-#
+
+### libraries
 require(tidyverse)
 require(shinythemes)
-require(lubridate)
-require(maps)
-require(ggmap)
-require(mapproj)
-require(mapdata)
-require(rgeos)
-require(maptools)
-require(sp)
-require(raster)
-require(rgdal)
-require(dismo)
 require(rcartocolor)
+require(lubridate)
+require(ggbeeswarm)
+require(leaflet)
+require(kableExtra)
+require(ggthemes)
+
+require(transformr)
+
+### old ggmap packages:
+# require(maps)
+# require(ggmap)
+# require(mapproj)
+# require(mapdata)
+# require(rgeos)
+# require(maptools)
+# require(sp)
+# require(raster)
+# require(rgdal)
+# require(dismo)
+
+### if adding animations
 # require(gganimate)
 # require(gifski)
-require(kableExtra)
 # require(animation)
 # require(lattice)
 # require(proto)
 # require(png)
-require(transformr)
-require(ggthemes)
-# library(ggridges)
-library(ggbeeswarm)
 
+### All things are made in global.R and then made reactive in this app.R script
 source("./global.R")
 
+
+#flatly_blue = #18bc9c
+# sick_green: #90D13E
 #############################################################################################################################
 ### UI half of app.R:
 
@@ -40,9 +48,13 @@ ui <- fluidPage(theme = shinytheme("flatly"),
 
   ### Sidebar layout ###
   sidebarLayout(
-    sidebarPanel(titlePanel(title), p(stitle), br(),
-      fluidRow(column(12, plotOutput(outputId = "map1"))),
-      h4("Data filters:"),
+    sidebarPanel(
+      # titlePanel(title),
+      titlePanel(title = apptitle), p(stitle), hr, hr(),
+      # fluidRow(column(12, plotOutput(outputId = "map1"))), OLD Map
+      fluidRow(leafletOutput("leaflet.map",width = "95%", height = "300px")),
+
+      hr(), p(tags$b("Data filters:")),
       fluidRow(column(4, checkboxGroupInput("cbeach", label = "Beaches",
                                             choices = list("Britannia",
                                                            "Mooney's Bay" = "Mooneys",
@@ -51,15 +63,16 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                                            "Westboro"),
                                      selected = c("Westboro","Mooneys", "Britannia", "PetrieEast","PetrieRiver"))),
                column(3, checkboxGroupInput("cyear",label = "Year", choices = seq(2014,2019), selected = seq(2014,2019))),
-               column(4,checkboxGroupInput("cstatus", label = "Status",
+               column(3, checkboxGroupInput("cstatus", label = "Status",
                                            choices = list("Open" = 'Swim',
-                                                          "E. coli" = 'E. coli',
+                                                          "E.coli" = 'E. coli',
                                                           "Rain" = 'Rain',
                                                           "Closed" = 'Closed'),
                                     selected = c('Swim', "E. coli", "Rain", "Closed")
                                     ))
         ),
-      h6(byline)
+      p(hr(), byline, hr()),
+
     ),
 
     ### Main Panels ###
@@ -79,7 +92,7 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                                                           tabPanel("Total days", DT::dataTableOutput("table.status.days")),
                                                           tabPanel("Percentages", DT::dataTableOutput("table.status.percent"))
                                               )),
-                                     br(), rain_2016_note)),
+                                     rain_2016_note)),
 
             tabPanel("E. coli", icon = icon("poo"), br(),
                        tabsetPanel(id = "ts2", type = 'tabs',
@@ -164,14 +177,14 @@ ui <- fluidPage(theme = shinytheme("flatly"),
                            ),br()
                    ),
           tabPanel("Notes", icon = icon("sticky-note"), br(),
-                   notes_txt, br(),
-                   dashboard_txt, br(),
+                   notes_txt,
+                   dashboard_txt, hr(),
                    h4("Data sources"),
                    tags$ol(tags$li("E. coli counts and beach status", source.beach),
                            tags$li("Weather at Ottawa Intl Ottawa Intl A 71628", source.weather),
                            tags$li("River hydrology wateroffice.ec.gc.ca", source.river, source.river2)
                            ),
-                   br(),refs
+                   hr(),refs, br(), br()
                    )
           )
       )
@@ -263,6 +276,21 @@ server <- function(input, output){
             colour = "grey",
             size = 0.2)
             )
+  })
+
+## Leaflet
+  # points <- eventReactive(input$recalc, {
+  #
+  # }, ignoreNULL = FALSE)
+
+  output$leaflet.map <- renderLeaflet({
+    leaflet() %>%
+      # addTiles() %>%
+      addProviderTiles(providers$Stamen.TonerLite,
+                       options = providerTileOptions(noWrap = TRUE)
+      ) %>%
+      addMarkers(data = cbind(geoInput()$Long,geoInput()$Lat),
+                 label =  geoInput()$Location)
   })
 
 transparency <- 0.85
@@ -404,11 +432,11 @@ transparency <- 0.85
   output$stackbars <- renderPlot({
     ggplot(beachesInput(), aes(x = location, fill = status)) +
       geom_bar(stat = 'count', aes(fill = status), alpha = 0.66) +
-      geom_text(stat= 'count', aes(label=..count..), size = 4,  position= position_stack(0.5)) +
-      geom_text(stat = 'count', aes(group = location, label=..count..), colour='black', size = 3, vjust=-1.666) +
+      geom_text(stat= 'count', aes(label=..count..), size = 3.5,  position= position_stack(0.5), colour = "black") +
+      geom_text(stat = 'count', aes(group = location, label=..count..), colour='#18bc9c', size = 3, vjust=-1.666) +
       ylim(c(0,76)) +
       scale_fill_discrete(name = "status", direction = 1, limits = levels(beaches$status), labels = levels(beaches$status)) +
-      facet_grid(~year) + #coord_flip() +
+      facet_grid(~year) + # coord_flip() +
       ylab("Number of days") + basic_theme + facet_labels + base_x +
       theme(axis.text.x = element_text(angle = 50, hjust = 1, size = 10),
             axis.title.x = element_blank(),
@@ -428,10 +456,10 @@ transparency <- 0.85
       scale_colour_discrete(name = "Status", direction = 1, labels = levels(beaches$status), limits = levels(beaches$status)) +
       scale_fill_discrete(name = "Status", direction = 1, labels = levels(beaches$status), limits = levels(beaches$status)) +
       scale_size_continuous("E. coli / 100 mL") +
-      facet_grid(year~.) + xlim(c(166,244)) + xlab("Days into year") + basic_theme + facet_labels + base_x +
+      facet_grid(year~.) + xlim(c(166,244)) + xlab("Day of year") + basic_theme + facet_labels + base_x +
       theme(axis.text.x = element_text(angle = 50, hjust = 1),
             axis.title.y = element_blank(),
-            legend.text = element_text(size= 10),
+            legend.text = element_text(size= 9),
             legend.key.size = unit(5,"point"))+
       theme(legend.position="top")
   })
